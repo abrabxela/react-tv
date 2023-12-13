@@ -8,19 +8,20 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import logo from "./img/logo.png";
 import SearchAppBar from "../Search/Search";
+import { NavLink } from "react-router-dom";
+import "./Navigation.css";
+import { MENU } from "../../constants/menu";
 
 const pages = ["home", "tv shows", "about us"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 function Navigation() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,11 +38,9 @@ function Navigation() {
     setAnchorElUser(null);
   };
 
-  
-
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" sx={{background:'#141414'}}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
@@ -117,17 +116,19 @@ function Navigation() {
             ></Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+              {MENU.map(({ name, link }, index) => (
+                <NavLink
+                  key={index}
+                  className={({ isActive }) =>
+                    `NavLink ${isActive ? "isActive" : ""}`
+                  }
+                  to={link}
                 >
-                  {page}
-                </Button>
+                  {name}
+                </NavLink>
               ))}
             </Box>
-            <SearchAppBar/>
+            <SearchAppBar />
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

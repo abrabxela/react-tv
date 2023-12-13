@@ -3,17 +3,29 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { DEFAULT_IMAGE } from "../../constants/ImgConstant";
+import { Link } from "react-router-dom";
+
+const buttonStyle = {
+  textDecoration: "none",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  border: "1px solid #E50914",
+  background: "#E50914",
+  width: "100px",
+  height: "30px",
+  color: "#fff",
+};
 
 export default function SingleCard(props) {
-  const { id, name, time, image = DEFAULT_IMAGE, makeClick } = props;
-
-  
+  const { id, name, time, image = DEFAULT_IMAGE } = props;
 
   return (
-    <Card sx={{ maxWidth: 345, mt: "50px", ml: "30px", mr: "30px", mb: "180px" }}>
+    <Card
+      sx={{ maxWidth: 345, mt: "50px", ml: "30px", mr: "30px", mb: "180px" }}
+    >
       <CardMedia
         sx={{
           width: "345px",
@@ -55,19 +67,9 @@ export default function SingleCard(props) {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button
-              size="small"
-              sx={{
-                border: "1px solid #E50914",
-                background: "#E50914",
-                width: "100px",
-                height: "30px",
-                color: "#fff",
-              }}
-              onClick={() => makeClick(id)}
-            >
+            <Link to={`/films/${id}`} style={buttonStyle}>
               show
-            </Button>
+            </Link>
           </CardActions>
         </Card>
       </CardMedia>
