@@ -1,15 +1,13 @@
-import { Link, useParams } from "react-router-dom"
-
-
-function FilmDetails(){
-    const {filmId} = useParams();
-    return(
-        <>
-        <h1>This is film ID : {filmId}</h1>
-        <Link to={'/home'} >home</Link> 
-        </>
-        
-    )
+import SingleItemHeader from "../components/FilmDetails/SingleItemHeader";
+import SingleItemTabs from "../components/FilmDetails/SingleItemTabs";
+import ActorItem from "../components/FilmDetails/ActorItem";
+function FilmDetails() {
+  return (
+    <>
+      <SingleItemHeader />
+      <SingleItemTabs />
+      <ActorItem />
+    </>
+  );
 }
-
 export default FilmDetails;
