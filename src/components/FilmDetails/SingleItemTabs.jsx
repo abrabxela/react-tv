@@ -4,8 +4,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useParams } from "react-router-dom";
-import GetFilmRequest from "../../hooks/GetFilmRequest";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -13,6 +11,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+
+
+
+
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,11 +50,10 @@ function a11yProps(index) {
 }
 
 export default function SingleItemTabs() {
-  const { filmId } = useParams();
-  const { summary, series } = GetFilmRequest(filmId);
-  
- 
+  const storedFilmDetails = localStorage.getItem("filmDetails");
+  const parsedFilmDetails = JSON.parse(storedFilmDetails);
 
+  const { summary, series } = { ...parsedFilmDetails };
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -111,33 +112,36 @@ export default function SingleItemTabs() {
           />
         </Tabs>
       </Box>
-      <CustomTabPanel value={value} index={0} >
-      <Typography sx={{color:"white"}}>
-        {summary}
-      </Typography>
-        
+      <CustomTabPanel value={value} index={0}>
+        <Typography sx={{ color: "white" }}>{summary}</Typography>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <TableContainer component={Paper} sx={{backgroundColor:"#191919"}}>
+        <TableContainer component={Paper} sx={{ backgroundColor: "#191919" }}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
-              <TableRow sx={{backgroundColor:"#282B2F"}}>
-                <TableCell sx={{color:"white"}}>Episode</TableCell>
-                <TableCell sx={{color:"white"}} align="left">Airdate</TableCell>
-                <TableCell sx={{color:"white"}} align="left">Rating</TableCell>
+              <TableRow sx={{ backgroundColor: "#282B2F" }}>
+                <TableCell sx={{ color: "white" }}>Episode</TableCell>
+                <TableCell sx={{ color: "white" }} align="left">
+                  Airdate
+                </TableCell>
+                <TableCell sx={{ color: "white" }} align="left">
+                  Rating
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {series.map((singleSeries, index) => (
+              {series && series.map((singleSeries, index) => (
                 <TableRow
                   key={singleSeries.id || index}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row" sx={{color:"white"}}>
+                  <TableCell component="th" scope="row" sx={{ color: "white" }}>
                     {singleSeries.name}
                   </TableCell>
-                  <TableCell align="left" sx={{color:"white"}}>{singleSeries.airdate}</TableCell>
-                  <TableCell align="left" sx={{color:"white"}}>
+                  <TableCell align="left" sx={{ color: "white" }}>
+                    {singleSeries.airdate}
+                  </TableCell>
+                  <TableCell align="left" sx={{ color: "white" }}>
                     {singleSeries.rating.average}
                   </TableCell>
                 </TableRow>

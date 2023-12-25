@@ -29,7 +29,14 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function SingleItemHeader() {
   const { filmId } = useParams();
   const apiData = GetFilmRequest(filmId);
+  
+ 
+  
   const { name, type, rating, runtime, premiered, views, genres, image } = { ...apiData };
+
+  const filmDetailsKey = 'filmDetails';
+  localStorage.setItem(filmDetailsKey, JSON.stringify(apiData));
+  
   
   const { medium } = { ...image };
   const { average } = { ...rating };
@@ -45,6 +52,7 @@ export default function SingleItemHeader() {
               </Grid>
               <Grid>
                 <Item > 
+                  
                 <BasicRating value={average}/>{average}
                 </Item>
               </Grid>

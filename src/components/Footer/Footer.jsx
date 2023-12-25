@@ -10,14 +10,14 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import "./FooterStyle.css";
 function Footer() {
   return (
-    <footer>
+    <footer style={{marginTop:"100px"}}>
       <Grid
         sx={{
           position: "fixed",
           bottom: "0",
-          width: "auto",
+          width: "100%",
           display: "flex",
-          backgroundColor: "rgb(26, 56,86)",
+          backgroundColor: "#191919",
         }}
       >
         <Grid
@@ -55,26 +55,26 @@ function Footer() {
         </Grid>
 
         <Grid>
-          <Typography variant="body2" style={{ margin: "20px" }}>
+          <Typography variant="body2" style={{ margin: "20px", color: "white" }}>
             Follow Us:
           </Typography>
           <Stack direction="row" spacing={1} style={{ margin: "20px" }}>
-            <IconButton>
+            <IconButton sx={{color:"white", backgroundColor:"#252525"}}>
               <FacebookIcon />
             </IconButton>
-            <IconButton>
+            <IconButton sx={{color:"white", backgroundColor:"#252525"}}>
               <TwitterIcon />
             </IconButton>
-            <IconButton>
+            <IconButton sx={{color:"white", backgroundColor:"#252525"}}>
               <GoogleIcon />
             </IconButton>
-            <IconButton>
+            <IconButton sx={{color:"white", backgroundColor:"#252525"}}>
               <GitHubIcon />
             </IconButton>
           </Stack>
         </Grid>
         <Grid sx={{ paddingRight: "50px" }}>
-          <Typography>Whatchit App</Typography>
+          <Typography sx={{color: "white"}}>Whatchit App</Typography>
           <Stack direction="row" spacing={1}>
             <IconButton>
               <img
